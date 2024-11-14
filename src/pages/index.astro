@@ -1,0 +1,45 @@
+---
+import HeroSection from "../components/HeroSection.astro";
+import LandingHeader from "../components/LandingHeader.astro";
+import PlatilloSection from "../components/PlatillosSection.astro";
+import PostresSection from "../components/PostresSection.astro";
+import BebidasSection from "../components/BebidasSection.astro";
+
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+
+const navLinks = [
+  { href: '/NuevaReceta', text: 'NuevaReceta' },
+];
+---
+
+<Layout title="El Recetario ideal">
+  <LandingHeader />
+
+  <main
+    class="snap-y snap-mandatory relative w-full h-screen overflow-y-auto overflow-x-hidden scroll-smooth"
+  >
+    <div class="snap-center">
+      <HeroSection />
+    </div>
+    <div class="snap-center">
+      <PlatilloSection/>
+    </div>
+    <div class="snap-center">
+      <PostresSection/>
+    </div>
+    <div class="snap-center">
+      <BebidasSection/>
+    </div>   
+  </main>
+</Layout>
+
+
+
+
+<main class="pb-16">
+  <!-- Tu contenido aquí -->
+</main>
+
+<Nav links={navLinks} />
+

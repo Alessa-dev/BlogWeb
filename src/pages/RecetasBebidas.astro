@@ -1,0 +1,63 @@
+---
+// Recipes.astro
+import Header from "../components/HeaderDeRecetas.astro";
+import RecipeCard from '../components/RecetasBlog.astro';
+import Footer from '../components/FooterNuevaReceta.astro';
+import HeaderBlogs from '../components/HeaderBlogs.astro';
+import Nav from "../components/Nav.astro";
+const navLinks = [
+  { href: '/login', text: 'LogIn' }
+];
+// Ejemplo de recetas
+const recipes = [
+    {
+        name: "Spaghetti Carbonara",
+        image: "https://images.pexels.com/photos/2408666/pexels-photo-2408666.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+        content: "Deliciosa pasta con salsa cremosa.",
+        steps: "1. Cocer la pasta. 2. Preparar la salsa. 3. Mezclar y servir."
+    },
+    {
+        name: "Tacos al Pastor",
+        image: "https://images.pexels.com/photos/447592/pexels-photo-447592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        content: "Tacos tradicionales de cerdo marinado.",
+        steps: "1. Marinar la carne. 2. Cocer y servir en tortillas."
+    },
+    {
+        name: "Ensalada César",
+        image: "https://images.pexels.com/photos/139829/pexels-photo-139829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        content: "Ensalada fresca con aderezo César.",
+        steps: "1. Preparar los ingredientes. 2. Mezclar y servir."
+    },
+];
+
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mis Recetas Favoritas</title>
+</head>
+<body class="bg-gray-100">
+
+    <Header />
+    <body><HeaderBlogs/></body>
+    <main class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <h2 class="text-3xl font-semibold mb-4">Recetas de platillos publicadas</h2>
+        <div class="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
+            {recipes.map(recipe => (
+                <RecipeCard 
+                    name={recipe.name}
+                    image={recipe.image}
+                    content={recipe.content}
+                    steps={recipe.steps} 
+                />
+            ))}
+        </div>
+    </main>
+
+    <Footer />
+    <Nav links={navLinks} />
+</body>
+</html>

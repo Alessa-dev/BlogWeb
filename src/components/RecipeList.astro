@@ -1,0 +1,55 @@
+---
+// RecipeList.astro
+import { onMount } from 'astro/client';
+
+let recipes = [];
+
+onMount(async () => {
+  const response = await fetch('/api/recipes');
+  recipes = await response.json();
+});
+---
+
+<ul id="recipe-list">
+  {recipes.map(recipe => (
+    <li key={recipe.id}>
+      <h3>{recipe.title}</h3>
+      <img src={recipe.image} alt={recipe.title} />
+      <p>{recipe.content}</p>
+      <button onclick={() => handleEdit(recipe.id)}>Editar</button>
+      <button onclick={() => handleDelete(recipe.id)}>Eliminar</button>
+    </li>
+  ))}
+</ul>
+
+<script>
+  const handleEdit = (id) => {
+    // Lógica para editar la receta
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch('/api/recipes', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id })
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.message);
+        // Actualizar la lista de recetas
+        const recipeList = document.getElementById('recipe-list');
+        const recipeItem = recipeList.querySelector(`li[key="${id}"]`);
+        recipeList.removeChild(recipeItem);
+      } else {
+        alert(result.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Ocurrió un error al intentar eliminar la receta.');
+    }
+  };
+</script>

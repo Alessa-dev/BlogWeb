@@ -1,0 +1,49 @@
+---
+// NuevaRecetaForm.astro
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const data = {
+    title: formData.get('title'),
+    image: formData.get('image'),
+    content: formData.get('content')
+  };
+
+  try {
+    const response = await fetch('/api/recipes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      alert(result.message);
+      
+    } else {
+      alert(result.message);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Ocurrió un error al intentar crear la receta.');
+  }
+};
+---
+
+<form class="w-full" onsubmit={handleSubmit}>
+  <div class="mb-4">
+    <label for="title" class="block text-sm font-medium text-gray-700">Título de la Receta</label>
+    <input type="text" id="title" name="title" required class="mt-1 block w-full border border-gray-300 rounded-md p-3 focus:border-teal-500 focus:ring focus:ring-teal-200 transition" placeholder="Título de la receta" />
+  </div>
+  <div class="mb-4">
+    <label for="image" class="block text-sm font-medium text-gray-700">Imagen de la Receta</label>
+    <input type="url" id="image" name="image" required class="mt-1 block w-full border border-gray-300 rounded-md p-3 focus:border-teal-500 focus:ring focus:ring-teal-200 transition" placeholder="URL de la imagen" />
+  </div>
+  <div class="mb-4">
+    <label for="content" class="block text-sm font-medium text-gray-700">Contenido</label>
+    <textarea id="content" name="content" required class="mt-1 block w-full border border-gray-300 rounded-md p-3 focus:border-teal-500 focus:ring focus:ring-teal-200 transition" placeholder="Contenido de la receta"></textarea>
+  </div>
+  <button type="submit" class="w-full bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700 transition duration-200 font-semibold">Guardar Receta</button>
+</form>

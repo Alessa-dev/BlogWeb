@@ -1,0 +1,49 @@
+---
+// LoginForm.astro
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const data = {
+    email: formData.get('email'),
+    password: formData.get('password')
+  };
+
+  try {
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      alert(result.message);
+      // Redirigir al usuario a la vista "Nueva Receta"
+      window.location.href = './src/pages/NuevasReceta.astro'; 
+    } else {
+      alert(result.message);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Ocurrió un error al intentar iniciar sesión.');
+  }
+};
+---
+
+<div class="flex flex-col items-center bg-white p-8 rounded-lg shadow-lg max-w-sm mx-auto">
+  <h2 class="text-3xl font-bold text-center mb-6 text-black">Iniciar Sesión</h2>
+  <p class="mb-4 text-center text-gray-600">Ingresa tu correo y contraseña para acceder a tu cuenta.</p>
+  <form class="w-full" onsubmit={handleSubmit}>
+    <div class="mb-4">
+      <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+      <input type="email" id="email" name="email" required class="mt-1 block w-full border border-gray-300 rounded-md p-3 focus:border-teal-500 focus:ring focus:ring-teal-200 transition" placeholder="tu_email@ejemplo.com" />
+    </div>
+    <div class="mb-6">
+      <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+      <input type="password" id="password" name="password" required class="mt-1 block w-full border border-gray-300 rounded-md p-3 focus:border-teal-500 focus:ring focus:ring-teal-200 transition" placeholder="********" />
+    </div>
+    <button type="submit" class="w-full bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700 transition duration-200 font-semibold">Iniciar Sesión</button>
+  </form>
+</div>

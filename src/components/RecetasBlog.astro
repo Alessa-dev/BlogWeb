@@ -1,0 +1,23 @@
+---
+// RecipeCard.astro
+export interface Recipe {
+    name: string;
+    image: string;
+    content: string;
+    steps: string;
+}
+
+const { name, image, content, steps } = Astro.props as Recipe;
+---
+
+<div class="overflow-hidden transition-shadow duration-300 bg-white rounded shadow-sm">
+    <img src={image} class="object-cover w-full h-64" alt={name} />
+    <div class="p-5 border border-t-0">
+        <p class="mb-3 text-xs font-semibold tracking-wide uppercase">
+            <span class="text-gray-600">— {new Date().toLocaleDateString()}</span>
+        </p>
+        <a href="/" aria-label="Category" title={name} class="inline-block mb-3 text-2xl font-bold leading-5 transition-colors duration-200 hover:text-deep-purple-accent-700">{name}</a>
+        <p class="mb-2 text-gray-700">{content}</p>
+        <a href="/" aria-label="" class="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800">Ver más</a>
+    </div>
+</div>

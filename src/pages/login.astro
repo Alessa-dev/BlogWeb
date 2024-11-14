@@ -1,0 +1,23 @@
+---
+// login.astro
+import Layout from '../Layouts/Layout.astro';
+import LoginForm from '../components/LoginForm.astro';
+import Nav from '../components/Nav.astro';
+
+const navLinks = [
+  { href: '/', text: 'Inicio' },
+  { href: '/about', text: 'Acerca de' },
+  { href: '/contact', text: 'Contacto' }
+];
+---
+
+<Layout title="Iniciar Sesión - Mi Blog de Comida">
+  <div class="flex items-center justify-center h-screen">
+    <LoginForm />
+  </div>
+  <main class="pb-16">
+    <!-- Tu contenido aquí -->
+  </main>
+  
+  <Nav links={navLinks} />
+</Layout>

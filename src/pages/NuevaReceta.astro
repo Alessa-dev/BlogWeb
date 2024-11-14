@@ -1,0 +1,63 @@
+---
+
+import Header from "../components/HeaderCrearReceta.astro"
+import RecipeForm from "../components/NuevaRecetaForm.astro";
+import Nav from "../components/Nav.astro";
+const navLinks = [
+  { href: '/login', text: 'LogIn' },
+];const handleLogout = () => {
+  console.log('Cerrando sesión');
+  window.location.href = '/login';
+};
+import Layout from '../Layouts/Layout.astro';
+import NuevaRecetaForm from '../components/NuevaRecetaForm.astro';
+import RecipeList from '../components/RecipeList.astro';
+
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creando recetas</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; 
+        }
+        main {
+            flex: 1; 
+        }
+        .logout-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <Header />
+
+    <main class="container mx-auto p-6">
+        <Layout title="Nueva Receta">
+            <div class="flex flex-col items-center bg-white p-8 rounded-lg shadow-lg max-w-sm mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-6 text-black">Crear Nueva Receta</h2>
+                <NuevaRecetaForm />
+                <h2 class="text-3xl font-bold text-center mb-6 text-black">Lista de Recetas</h2>
+                <RecipeList />
+            </div>
+        </Layout>
+    </main>
+
+
+    <a
+      class="border-[3px] border-white bg-white/5 backdrop-blur-sm text-sm rounded font-medium text-gray-600 px-12 py-2 inline-block hover:bg-white hover:text-black transition-colors"
+      href="/login"
+    >
+      Cerrar Sesión
+    </a>
+</body>
+</html>
